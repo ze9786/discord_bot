@@ -12,7 +12,7 @@ client.on('message', msg => {
     // 如果訊息的內容是 'ping'
     if (msg.content === 'ping') {
         // 則 Bot 回應 'Pong'
-        msg.reply('pong');
+        msg.reply('ping乜呀你');
     }
 });
 
@@ -41,7 +41,7 @@ class Music {
 
         // 如果 Bot 還沒加入該語音群的語音頻道
         if (!this.connection[guildID]) {
-            msg.channel.send('請先加入頻道');
+            msg.channel.send('要加我入去先唱到歌架(!!join)');
             return;
         }
 
@@ -66,7 +66,7 @@ class Music {
 
             // 如果目前正在播放歌曲就加入隊列，反之則播放歌曲
             if (this.isPlaying) {
-                msg.channel.send(`歌曲加入隊列：${info.title}`);
+                msg.channel.send(`一陣我會唱${info.title}`);
             } else {
                 this.isPlaying = true;
                 this.playMusic(msg, guildID, this.queue[guildID][0]);
@@ -81,7 +81,7 @@ class Music {
     playMusic(msg, guildID, musicInfo) {
 
         // 提示播放音樂
-        msg.channel.send(`播放音樂：${musicInfo.name}`);
+        msg.channel.send(`而家唱${musicInfo.name}`);
 
         // 播放音樂
         this.dispatcher[guildID] = this.connection[guildID].play(ytdl(musicInfo.url, { filter: 'audioonly' }));
@@ -101,7 +101,7 @@ class Music {
                 self.playMusic(msg, guildID, self.queue[guildID].shift());
             } else {
                 self.isPlaying = false;
-                msg.channel.send('目前沒有音樂了，請加入音樂 :D');
+                msg.channel.send('姜B想唱歌～快D點歌啦！');
             }
 
         });
